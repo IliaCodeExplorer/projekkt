@@ -10,5 +10,8 @@ variable "public_subnet_id" {
 variable "vpc_id" {
   description = "The ID of the VPC where the Bastion Host will be created"
   type        = string
-  default = "10.100.0.0/24"
+}
+variable "common_tags" {
+  description = "Common tags for all resources in the module"
+  type = map(string)
 }
