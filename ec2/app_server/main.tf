@@ -9,13 +9,13 @@ data "aws_ami" "latest_amazon_linux" {
 resource "aws_instance" "app_server" {
   count         = var.instance_count
   ami           = data.aws_ami.latest_amazon_linux.id
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   subnet_id     = var.private_subnet_id
 
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 
   tags = {
-    Name = "App Server ${count.index}"
+    Name = "App Server ${count.index +1}"
   }
 }
 resource "aws_security_group" "app_sg" {

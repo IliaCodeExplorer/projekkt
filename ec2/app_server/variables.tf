@@ -11,5 +11,5 @@ variable "private_subnet_id" {
 variable "vpc_id" {
   description = "The ID of the VPC where the Bastion Host will be created"
   type        = string
-  default     = "10.10.0.0/24"
+  # default     = "10.10.0.0/24"
 }
