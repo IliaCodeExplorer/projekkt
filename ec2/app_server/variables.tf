@@ -13,3 +13,7 @@ variable "vpc_id" {
   type        = string
   # default     = "10.10.0.0/24"
 }
+variable "key_name" {
+  description = "The name of the SSH key pair used for the EC2 instance"
+  type        = string
+}

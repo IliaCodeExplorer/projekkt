@@ -11,7 +11,6 @@ variable "common_tags" {
   type = map(string)
 }
 variable "key_name" {
-  description = "The name of the SSH key"
-  #default     = "deployer-key"
-  type = string
+  description = "The name of the SSH key pair used for the EC2 instance"
+  type        = string
 }
