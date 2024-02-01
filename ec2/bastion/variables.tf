@@ -1,8 +1,3 @@
-variable "key_name" {
-  description = "The key name to use for the instance"
-  type        = string
-}
-
 variable "public_subnet_id" {
   description = "The ID of the public subnet"
   type        = string
@@ -14,4 +9,9 @@ variable "vpc_id" {
 variable "common_tags" {
   description = "Common tags for all resources in the module"
   type = map(string)
+}
+variable "key_name" {
+  description = "The name of the SSH key"
+  #default     = "deployer-key"
+  type = string
 }
