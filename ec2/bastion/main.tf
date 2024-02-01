@@ -6,9 +6,13 @@ data "aws_ami" "latest_amazon_linux" {
     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
 }
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = file("~/.ssh/id_rsa.pub")
+}
 resource "aws_instance" "bastion" {
   ami           = data.aws_ami.latest_amazon_linux.id
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   key_name      = var.key_name
   subnet_id     = var.public_subnet_id
 
