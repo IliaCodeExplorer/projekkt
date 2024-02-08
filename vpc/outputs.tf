@@ -25,4 +25,18 @@ output "nat_gateway_id" {
 output "subnet_ids" {
   value = [aws_subnet.public_subnet.id, aws_subnet.private_subnet.id]
   description = "List of subnet IDs"
+
+}
+# output "public_subnets_ids" {
+#   value = aws_subnet.public_subnet.id
+# }
+# output "private_subnets_ids" {
+#   value = aws_subnet.private_subnet.id
+# }
+
+output "public_subnet2" {
+  value = aws_subnet.public_subnet2.id
+}
+output "private_subnet2" {
+  value = aws_subnet.private_subnet2.id
 }

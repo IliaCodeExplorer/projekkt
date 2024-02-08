@@ -33,7 +33,7 @@ module "app_serv_ec2" {
   source            = "./ec2/app_server"
   private_subnet_id = module.vpc.private_subnet_id
   vpc_id            = module.vpc.vpc_id
-  key_name          = "key-app"
+  key_name          = module.bastion.key_name
 }
 
 module "rds" {
@@ -43,4 +43,32 @@ module "rds" {
   db_name     = "mydatabase"
   db_username = "admin"
   db_password = "password1"
+}
+module "elb" {
+  source             = "./elb"
+  environment        = "prod"
+  vpc_id             = module.vpc.vpc_id
+public_subnet =  module.vpc.public_subnet_id
+public_subnet2 = module.vpc.public_subnet2
+
+  security_groups = module.security.web_sg_id
+
+  common_tags        = { "Project" = "MyProject", "Environment" = "prod" }
+}
+
+module "autoscaling" {
+  source = "./autoscaling"
+  min_size             = 1
+  max_size             = 3
+  desired_capacity     = 2
+  key_name = module.bastion.key_name
+  # vpc_zone_identifier  = module.vpc.private_subnets_ids
+  private_subnet = module.vpc.private_subnet_id
+  security_groups      = [module.security.web_sg_id]
+  target_group_arn     = module.elb.target_group_arn
+  common_tags          = {
+    Project     = "MyProject"
+    Environment = "prod"
+  }
+  environment = "prod"
 }

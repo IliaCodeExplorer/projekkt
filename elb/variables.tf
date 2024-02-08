@@ -8,12 +8,16 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "public_subnets_ids" {
-  description = "List of IDs of public subnets for the ALB"
-  type        = list(string)
+variable "public_subnet" {
+  type = string
 }
-
+variable "public_subnet2" {
+  type = string
+}
 variable "common_tags" {
   description = "Common tags for all resources in the module"
   type        = map(string)
+}
+variable "security_groups" {
+  type = string
 }
