@@ -13,14 +13,33 @@ resource "aws_subnet" "public_subnet" {
 
 }
 
+resource "aws_subnet" "public_subnet2" {
+  vpc_id            = aws_vpc.my-vpc.id
+  cidr_block        = "10.0.3.0/24"
+  availability_zone = "${var.region}b"
+
+  tags = merge(local.tags, { Name = "${local.name_prefix}-public-subnet2" })
+
+}
 resource "aws_subnet" "private_subnet" {
   vpc_id            = aws_vpc.my-vpc.id
   cidr_block        = "10.0.2.0/24"
   availability_zone = "${var.region}b"
+  map_public_ip_on_launch = true
 
   tags = merge(local.tags, { Name = "${local.name_prefix}-private-subnet" })
 
 }
+resource "aws_subnet" "private_subnet2" {
+  vpc_id            = aws_vpc.my-vpc.id
+  cidr_block        = "10.0.4.0/24"
+  availability_zone = "${var.region}a"
+  map_public_ip_on_launch = true
+
+  tags = merge(local.tags, { Name = "${local.name_prefix}-private-subnet2" })
+
+}
+
 
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.my-vpc.id

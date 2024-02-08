@@ -11,9 +11,9 @@ variable "private_subnet_id" {
 variable "vpc_id" {
   description = "The ID of the VPC where the Bastion Host will be created"
   type        = string
-  # default     = "10.10.0.0/24"
+
 }
 variable "key_name" {
-  description = "The name of the SSH key pair used for the EC2 instance"
+  description = "The name of the SSH key pair to use for the instances"
   type        = string
 }
